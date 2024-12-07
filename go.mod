@@ -1,4 +1,4 @@
-module github.com/wirtualdev/terraform-provider-coder
+module github.com/wirtualdev/terraform-provider-wirtual
 
 go 1.22
 
