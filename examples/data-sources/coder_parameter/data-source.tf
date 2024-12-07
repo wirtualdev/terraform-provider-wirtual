@@ -1,6 +1,6 @@
-provider "coder" {}
+provider "wirtual" {}
 
-data "coder_parameter" "example" {
+data "wirtual_parameter" "example" {
   name        = "Region"
   description = "Specify a region to place your workspace."
   mutable     = false
@@ -18,7 +18,7 @@ data "coder_parameter" "example" {
   }
 }
 
-data "coder_parameter" "ami" {
+data "wirtual_parameter" "ami" {
   name        = "Machine Image"
   description = <<-EOT
     # Provide the machine image
@@ -31,14 +31,14 @@ data "coder_parameter" "ami" {
   }
 }
 
-data "coder_parameter" "is_public_instance" {
+data "wirtual_parameter" "is_public_instance" {
   name    = "Is public instance?"
   type    = "bool"
   icon    = "/icon/docker.svg"
   default = false
 }
 
-data "coder_parameter" "cores" {
+data "wirtual_parameter" "cores" {
   name    = "CPU Cores"
   type    = "number"
   icon    = "/icon/cpu.svg"
@@ -46,7 +46,7 @@ data "coder_parameter" "cores" {
   order   = 10
 }
 
-data "coder_parameter" "disk_size" {
+data "wirtual_parameter" "disk_size" {
   name    = "Disk Size"
   type    = "number"
   default = "5"
@@ -59,7 +59,7 @@ data "coder_parameter" "disk_size" {
   }
 }
 
-data "coder_parameter" "cat_lives" {
+data "wirtual_parameter" "cat_lives" {
   name    = "Cat Lives"
   type    = "number"
   default = "9"
@@ -71,7 +71,7 @@ data "coder_parameter" "cat_lives" {
   }
 }
 
-data "coder_parameter" "fairy_tale" {
+data "wirtual_parameter" "fairy_tale" {
   name      = "Fairy Tale"
   type      = "string"
   mutable   = true
@@ -79,14 +79,14 @@ data "coder_parameter" "fairy_tale" {
   ephemeral = true
 }
 
-data "coder_parameter" "users" {
+data "wirtual_parameter" "users" {
   name         = "system_users"
   display_name = "System users"
   type         = "list(string)"
   default      = jsonencode(["root", "user1", "user2"])
 }
 
-data "coder_parameter" "home_volume_size" {
+data "wirtual_parameter" "home_volume_size" {
   name        = "Home Volume Size"
   description = <<-EOF
   How large should your home volume be?

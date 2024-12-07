@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider"
 )
 
 // Run the docs generation tool, check its repository for more information on how it works and how docs

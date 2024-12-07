@@ -44,7 +44,7 @@ func workspaceOwnerDataSource() *schema.Resource {
 
 			var groups []string
 			if groupsRaw, ok := os.LookupEnv("WIRTUAL_WORKSPACE_OWNER_GROUPS"); ok {
-				if err := json.NewDecoder(strings.NewReader(groupsRaw)).Decode(&groups); err != nil {
+				if err := json.NewDewirtual(strings.NewReader(groupsRaw)).Decode(&groups); err != nil {
 					return diag.Errorf("invalid user groups: %s", err.Error())
 				}
 			}

@@ -1,5 +1,5 @@
 {
-  "name": "terraform-provider-coder",
+  "name": "terraform-provider-wirtual",
   "image": "mcr.microsoft.com/devcontainers/go:1.22",
   "features": {
     "ghcr.io/devcontainers/features/terraform:1": {

@@ -1,8 +1,8 @@
-data "coder_workspace" "me" {
+data "wirtual_workspace" "me" {
 }
 
 resource "kubernetes_pod" "dev" {
-  count = data.coder_workspace.me.start_count
+  count = data.wirtual_workspace.me.start_count
   metadata {
     name      = "k8s_example"
     namespace = "example"
@@ -17,8 +17,8 @@ resource "tls_private_key" "example_key_pair" {
   ecdsa_curve = "P256"
 }
 
-resource "coder_metadata" "pod_info" {
-  count       = data.coder_workspace.me.start_count
+resource "wirtual_metadata" "pod_info" {
+  count       = data.wirtual_workspace.me.start_count
   resource_id = kubernetes_pod.dev[0].id
   # (Enterprise-only) this resource consumes 200 quota units
   daily_cost = 200

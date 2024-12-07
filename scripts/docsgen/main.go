@@ -9,8 +9,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider"
 	"golang.org/x/xerrors"
 )
 
@@ -31,7 +31,7 @@ func main() {
 func exposeDeprecationMessage(p *schema.Provider) error {
 	// Patch data-sources
 	for dataSourceName, dataSource := range p.DataSourcesMap {
-		docFile := filepath.Join(docsDir, "data-sources", strings.Replace(dataSourceName, "coder_", "", 1)+".md")
+		docFile := filepath.Join(docsDir, "data-sources", strings.Replace(dataSourceName, "wirtual_", "", 1)+".md")
 
 		err := adjustDocFile(docFile, dataSource.Schema)
 		if err != nil {
@@ -41,7 +41,7 @@ func exposeDeprecationMessage(p *schema.Provider) error {
 
 	// Patch resources
 	for resourceName, resource := range p.ResourcesMap {
-		docFile := filepath.Join(docsDir, "resources", strings.Replace(resourceName, "coder_", "", 1)+".md")
+		docFile := filepath.Join(docsDir, "resources", strings.Replace(resourceName, "wirtual_", "", 1)+".md")
 
 		err := adjustDocFile(docFile, resource.Schema)
 		if err != nil {

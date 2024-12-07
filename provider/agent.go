@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"golang.org/x/xerrors"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider/helpers"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider/helpers"
 )
 
 func agentResource() *schema.Resource {
@@ -112,7 +112,7 @@ func agentResource() *schema.Resource {
 			},
 			"startup_script": {
 				ForceNew:    true,
-				Description: "A script to run after the agent starts. The script should exit when it is done to signal that the agent is ready. This option is an alias for defining a `coder_script` resource with `run_on_start` set to `true`.",
+				Description: "A script to run after the agent starts. The script should exit when it is done to signal that the agent is ready. This option is an alias for defining a `wirtual_script` resource with `run_on_start` set to `true`.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -129,7 +129,7 @@ func agentResource() *schema.Resource {
 				Type:        schema.TypeString,
 				ForceNew:    true,
 				Optional:    true,
-				Description: "A script to run before the agent is stopped. The script should exit when it is done to signal that the workspace can be stopped. This option is an alias for defining a `coder_script` resource with `run_on_stop` set to `true`.",
+				Description: "A script to run before the agent is stopped. The script should exit when it is done to signal that the workspace can be stopped. This option is an alias for defining a `wirtual_script` resource with `run_on_stop` set to `true`.",
 			},
 			"shutdown_script_timeout": {
 				Type:         schema.TypeInt,
@@ -188,7 +188,7 @@ func agentResource() *schema.Resource {
 				Type:          schema.TypeString,
 				ForceNew:      true,
 				Optional:      true,
-				Description:   "This option sets the behavior of the `startup_script`. When set to `\"blocking\"`, the `startup_script` must exit before the workspace is ready. When set to `\"non-blocking\"`, the `startup_script` may run in the background and the workspace will be ready immediately. Default is `\"non-blocking\"`, although `\"blocking\"` is recommended. This option is an alias for defining a `coder_script` resource with `start_blocks_login` set to `true` (blocking).",
+				Description:   "This option sets the behavior of the `startup_script`. When set to `\"blocking\"`, the `startup_script` must exit before the workspace is ready. When set to `\"non-blocking\"`, the `startup_script` may run in the background and the workspace will be ready immediately. Default is `\"non-blocking\"`, although `\"blocking\"` is recommended. This option is an alias for defining a `wirtual_script` resource with `start_blocks_login` set to `true` (blocking).",
 				ValidateFunc:  validation.StringInSlice([]string{"blocking", "non-blocking"}, false),
 				ConflictsWith: []string{"login_before_ready"},
 			},
@@ -343,7 +343,7 @@ func agentInstanceResource() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"agent_id": {
 				Type:        schema.TypeString,
-				Description: "The `id` property of a `coder_agent` resource to associate with.",
+				Description: "The `id` property of a `wirtual_agent` resource to associate with.",
 				ForceNew:    true,
 				Required:    true,
 			},
@@ -357,7 +357,7 @@ func agentInstanceResource() *schema.Resource {
 	}
 }
 
-// updateInitScript fetches parameters from a "coder_agent" to produce the
+// updateInitScript fetches parameters from a "wirtual_agent" to produce the
 // agent script from environment variables.
 func updateInitScript(resourceData *schema.ResourceData, i interface{}) diag.Diagnostics {
 	config, valid := i.(config)

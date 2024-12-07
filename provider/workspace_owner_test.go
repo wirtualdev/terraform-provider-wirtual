@@ -4,12 +4,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider"
 )
 
 const (
@@ -38,18 +38,18 @@ func TestWorkspaceOwnerDatasource(t *testing.T) {
 
 		resource.Test(t, resource.TestCase{
 			Providers: map[string]*schema.Provider{
-				"coder": provider.New(),
+				"wirtual": provider.New(),
 			},
 			IsUnitTest: true,
 			Steps: []resource.TestStep{{
 				Config: `
-			provider "coder" {}
-			data "coder_workspace_owner" "me" {}
+			provider "wirtual" {}
+			data "wirtual_workspace_owner" "me" {}
 			`,
 				Check: func(s *terraform.State) error {
 					require.Len(t, s.Modules, 1)
 					require.Len(t, s.Modules[0].Resources, 1)
-					resource := s.Modules[0].Resources["data.coder_workspace_owner.me"]
+					resource := s.Modules[0].Resources["data.wirtual_workspace_owner.me"]
 					require.NotNil(t, resource)
 
 					attrs := resource.Primary.Attributes
@@ -87,18 +87,18 @@ func TestWorkspaceOwnerDatasource(t *testing.T) {
 
 		resource.Test(t, resource.TestCase{
 			Providers: map[string]*schema.Provider{
-				"coder": provider.New(),
+				"wirtual": provider.New(),
 			},
 			IsUnitTest: true,
 			Steps: []resource.TestStep{{
 				Config: `
-			provider "coder" {}
-			data "coder_workspace_owner" "me" {}
+			provider "wirtual" {}
+			data "wirtual_workspace_owner" "me" {}
 			`,
 				Check: func(s *terraform.State) error {
 					require.Len(t, s.Modules, 1)
 					require.Len(t, s.Modules[0].Resources, 1)
-					resource := s.Modules[0].Resources["data.coder_workspace_owner.me"]
+					resource := s.Modules[0].Resources["data.wirtual_workspace_owner.me"]
 					require.NotNil(t, resource)
 
 					attrs := resource.Primary.Attributes

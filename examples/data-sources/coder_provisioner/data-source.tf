@@ -1,12 +1,12 @@
-provider "coder" {}
+provider "wirtual" {}
 
-data "coder_provisioner" "dev" {}
+data "wirtual_provisioner" "dev" {}
 
-data "coder_workspace" "dev" {}
+data "wirtual_workspace" "dev" {}
 
-resource "coder_agent" "main" {
-  arch = data.coder_provisioner.dev.arch
-  os   = data.coder_provisioner.dev.os
+resource "wirtual_agent" "main" {
+  arch = data.wirtual_provisioner.dev.arch
+  os   = data.wirtual_provisioner.dev.os
   dir  = "/workspace"
   display_apps {
     vscode          = true

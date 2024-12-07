@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider/helpers"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider/helpers"
 )
 
 // externalAuthDataSource returns a schema for an external authentication data source.

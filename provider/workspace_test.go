@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider"
 )
 
 func TestWorkspace(t *testing.T) {
@@ -27,20 +27,20 @@ func TestWorkspace(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		Providers: map[string]*schema.Provider{
-			"coder": provider.New(),
+			"wirtual": provider.New(),
 		},
 		IsUnitTest: true,
 		Steps: []resource.TestStep{{
 			Config: `
-			provider "coder" {
+			provider "wirtual" {
 				url = "https://example.com:8080"
 			}
-			data "coder_workspace" "me" {
+			data "wirtual_workspace" "me" {
 			}`,
 			Check: func(state *terraform.State) error {
 				require.Len(t, state.Modules, 1)
 				require.Len(t, state.Modules[0].Resources, 1)
-				resource := state.Modules[0].Resources["data.coder_workspace.me"]
+				resource := state.Modules[0].Resources["data.wirtual_workspace.me"]
 				require.NotNil(t, resource)
 
 				attribs := resource.Primary.Attributes
@@ -75,20 +75,20 @@ func TestWorkspace_UndefinedOwner(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		Providers: map[string]*schema.Provider{
-			"coder": provider.New(),
+			"wirtual": provider.New(),
 		},
 		IsUnitTest: true,
 		Steps: []resource.TestStep{{
 			Config: `
-			provider "coder" {
+			provider "wirtual" {
 				url = "https://example.com:8080"
 			}
-			data "coder_workspace" "me" {
+			data "wirtual_workspace" "me" {
 			}`,
 			Check: func(state *terraform.State) error {
 				require.Len(t, state.Modules, 1)
 				require.Len(t, state.Modules[0].Resources, 1)
-				resource := state.Modules[0].Resources["data.coder_workspace.me"]
+				resource := state.Modules[0].Resources["data.wirtual_workspace.me"]
 				require.NotNil(t, resource)
 
 				attribs := resource.Primary.Attributes
@@ -120,15 +120,15 @@ func TestWorkspace_MissingTemplateName(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		Providers: map[string]*schema.Provider{
-			"coder": provider.New(),
+			"wirtual": provider.New(),
 		},
 		IsUnitTest: true,
 		Steps: []resource.TestStep{{
 			Config: `
-			provider "coder" {
+			provider "wirtual" {
 				url = "https://example.com:8080"
 			}
-			data "coder_workspace" "me" {
+			data "wirtual_workspace" "me" {
 			}`,
 			ExpectError: regexp.MustCompile("WIRTUAL_WORKSPACE_TEMPLATE_NAME is required"),
 		}},

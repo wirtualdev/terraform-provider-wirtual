@@ -4,11 +4,11 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/stretchr/testify/require"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider"
 )
 
 func TestParameter(t *testing.T) {
@@ -21,7 +21,7 @@ func TestParameter(t *testing.T) {
 	}{{
 		Name: "FieldsExist",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "region"
 				display_name = "Region"
 				type = "string"
@@ -75,7 +75,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "RegexValidationWithOptions",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				option {
@@ -92,7 +92,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "MonotonicValidationWithNonNumberType",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				option {
@@ -108,7 +108,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "ValidationRegexMissingError",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				default = "hello"
@@ -121,7 +121,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "NumberValidation",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 2
@@ -148,7 +148,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "DefaultNotNumber",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = true
@@ -158,7 +158,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "DefaultNotBool",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "bool"
 				default = 5
@@ -168,7 +168,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "OptionNotBool",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "bool"
 				option {
@@ -184,7 +184,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "MultipleOptions",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				option {
@@ -214,7 +214,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "ValidDefaultWithOptions",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				default = "2"
@@ -245,7 +245,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "InvalidDefaultWithOption",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				default = "hi"
 				option {
@@ -262,7 +262,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "SingleOption",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				option {
 					name = "1"
@@ -273,7 +273,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "DuplicateOptionName",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				option {
@@ -290,7 +290,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "DuplicateOptionValue",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				option {
@@ -307,7 +307,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "RequiredParameterNoDefault",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 			}`,
@@ -323,7 +323,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "RequiredParameterDefaultNull",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				default = null
@@ -340,7 +340,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "OptionalParameterDefaultEmpty",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				default = ""
@@ -357,7 +357,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "OptionalParameterDefaultNotEmpty",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				default = "us-east-1"
@@ -374,7 +374,7 @@ func TestParameter(t *testing.T) {
 	}, {
 		Name: "ListOfStrings",
 		Config: `
-data "coder_parameter" "region" {
+data "wirtual_parameter" "region" {
 	name = "Region"
 	type = "list(string)"
 	default = jsonencode(["us-east-1", "eu-west-1", "ap-northeast-1"])
@@ -393,7 +393,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_Max",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 2
@@ -418,7 +418,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_MaxZero",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = -1
@@ -443,7 +443,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_MonotonicWithOptions",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 			  name        = "Region"
 			  type        = "number"
 			  description = <<-EOF
@@ -491,7 +491,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_Min",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 2
@@ -516,7 +516,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_MinZero",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 2
@@ -541,7 +541,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_MinMaxZero",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 0
@@ -568,7 +568,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_LesserThanMin",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 5
@@ -581,7 +581,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_GreaterThanMin",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 5
@@ -594,7 +594,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_CustomError",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 5
@@ -608,7 +608,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_NotInRange",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "number"
 				default = 8
@@ -622,7 +622,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "NumberValidation_BoolWithMin",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "bool"
 				default = true
@@ -635,7 +635,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "ImmutableEphemeralError",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				default = "abc"
@@ -647,7 +647,7 @@ data "coder_parameter" "region" {
 	}, {
 		Name: "RequiredEphemeralError",
 		Config: `
-			data "coder_parameter" "region" {
+			data "wirtual_parameter" "region" {
 				name = "Region"
 				type = "string"
 				mutable = true
@@ -661,7 +661,7 @@ data "coder_parameter" "region" {
 			t.Parallel()
 			resource.Test(t, resource.TestCase{
 				Providers: map[string]*schema.Provider{
-					"coder": provider.New(),
+					"wirtual": provider.New(),
 				},
 				IsUnitTest: true,
 				Steps: []resource.TestStep{{
@@ -670,7 +670,7 @@ data "coder_parameter" "region" {
 					Check: func(state *terraform.State) error {
 						require.Len(t, state.Modules, 1)
 						require.Len(t, state.Modules[0].Resources, 1)
-						param := state.Modules[0].Resources["data.coder_parameter.region"]
+						param := state.Modules[0].Resources["data.wirtual_parameter.region"]
 						require.NotNil(t, param)
 						if tc.Check != nil {
 							tc.Check(param)

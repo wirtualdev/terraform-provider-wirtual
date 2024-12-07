@@ -17,7 +17,7 @@ func metadataResource() *schema.Resource {
 		Description: "Use this resource to attach metadata to a resource. They will be " +
 			"displayed in the Wirtual dashboard alongside the resource. " +
 			"The resource containing the agent, and it's metadata, will be shown by default. " + "\n\n" +
-			"Alternatively, to attach metadata to the agent, use a `metadata` block within a `coder_agent` resource.",
+			"Alternatively, to attach metadata to the agent, use a `metadata` block within a `wirtual_agent` resource.",
 		CreateContext: func(c context.Context, resourceData *schema.ResourceData, i interface{}) diag.Diagnostics {
 			resourceData.SetId(uuid.NewString())
 
@@ -55,7 +55,7 @@ func metadataResource() *schema.Resource {
 				Type: schema.TypeString,
 				Description: "A URL to an icon that will display in the dashboard. View built-in " +
 					"icons [here](https://github.com/wirtualdev/wirtual/tree/main/site/static/icon). Use a " +
-					"built-in icon with `\"${data.coder_workspace.me.access_url}/icon/<path>\"`.",
+					"built-in icon with `\"${data.wirtual_workspace.me.access_url}/icon/<path>\"`.",
 				ForceNew: true,
 				Optional: true,
 				ValidateFunc: func(i interface{}, s string) ([]string, []error) {

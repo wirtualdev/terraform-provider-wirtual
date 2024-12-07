@@ -41,17 +41,17 @@ jobs:
       - name: Run integration test (mainline)
         timeout-minutes: 10
         env:
-          WIRTUAL_IMAGE: "ghcr.io/coder/coder"
+          WIRTUAL_IMAGE: "docker.io/onchainengineer/wirtualdev"
         run: |
-          source <(go run ./scripts/coderversion)
+          source <(go run ./scripts/wirtualversion)
           WIRTUAL_VERSION="${WIRTUAL_MAINLINE_VERSION}" go test -v ./integration
 
       - name: Run integration test (stable)
         timeout-minutes: 10
         env:
-          WIRTUAL_IMAGE: "ghcr.io/coder/coder"
+          WIRTUAL_IMAGE: "docker.io/onchainengineer/wirtualdev"
         run: |
-          source <(go run ./scripts/coderversion)
+          source <(go run ./scripts/wirtualversion)
           WIRTUAL_VERSION="${WIRTUAL_STABLE_VERSION}" go test -v ./integration
 
   # run acceptance tests in a matrix with Terraform core versions

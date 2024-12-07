@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider"
 )
 
 func TestDecode(t *testing.T) {

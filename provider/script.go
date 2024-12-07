@@ -38,7 +38,7 @@ func scriptResource() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"agent_id": {
 				Type:        schema.TypeString,
-				Description: "The `id` property of a `coder_agent` resource to associate with.",
+				Description: "The `id` property of a `wirtual_agent` resource to associate with.",
 				ForceNew:    true,
 				Required:    true,
 			},
@@ -60,7 +60,7 @@ func scriptResource() *schema.Resource {
 				Optional: true,
 				Description: "A URL to an icon that will display in the dashboard. View built-in " +
 					"icons [here](https://github.com/wirtualdev/wirtual/tree/main/site/static/icon). Use a " +
-					"built-in icon with `\"${data.coder_workspace.me.access_url}/icon/<path>\"`.",
+					"built-in icon with `\"${data.wirtual_workspace.me.access_url}/icon/<path>\"`.",
 			},
 			"script": {
 				ForceNew:    true,

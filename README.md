@@ -1,4 +1,4 @@
-# terraform-provider-coder
+# terraform-provider-wirtual
 
 Terraform provider for [Wirtual](https://github.com/wirtualdev/wirtual).
 
@@ -23,9 +23,9 @@ to setup your local Terraform to use your local version rather than the registry
 
    ```hcl
     provider_installation {
-        # Override the coder/coder provider to use your local version
+        # Override the wirtual/wirtual provider to use your local version
         dev_overrides {
-          "coder/coder" = "/path/to/terraform-provider-coder"
+          "wirtual/wirtual" = "/path/to/terraform-provider-wirtual"
         }
 
         # For all other providers, install them directly from their origin provider
@@ -40,16 +40,16 @@ to setup your local Terraform to use your local version rather than the registry
    ```hcl
    terraform {
        required_providers {
-           coder = {
-               source = "coder/coder"
+           wirtual = {
+               source = "wirtual/wirtual"
            }
        }
    }
    ```
    2. Run `terraform init` and observe a warning like `Warning: Provider development overrides are in effect`
-4. Run `go build -o terraform-provider-coder` to build the provider binary, which Terraform will try locate and execute
+4. Run `go build -o terraform-provider-wirtual` to build the provider binary, which Terraform will try locate and execute
 5. All local Terraform runs will now use your local provider!
-6. _**NOTE**: we vendor in this provider into `github.com/wirtualdev/wirtual`, so if you're testing with a local clone then you should also run `go mod edit -replace github.com/wirtualdev/terraform-provider-coder=/path/to/terraform-provider-coder` in your clone._
+6. _**NOTE**: we vendor in this provider into `github.com/wirtualdev/wirtual`, so if you're testing with a local clone then you should also run `go mod edit -replace github.com/wirtualdev/terraform-provider-wirtual=/path/to/terraform-provider-wirtual` in your clone._
 
 #### Terraform Acceptance Tests
 
@@ -70,10 +70,10 @@ To run these integration tests locally:
 1. Pull the version of the Wirtual image you wish to test:
 
    ```console
-     docker pull ghcr.io/coder/coder:main-x.y.z-devel-abcd1234
+     docker pull docker.io/onchainengineer/wirtualdev:main-x.y.z-devel-abcd1234
    ```
 
 1. Run `WIRTUAL_VERSION=main-x.y.z-devel-abcd1234 make test-integration`.
 
-> **Note:** you can specify `WIRTUAL_IMAGE` if the Wirtual image you wish to test is hosted somewhere other than `ghcr.io/coder/coder`.
-> For example, `WIRTUAL_IMAGE=example.com/repo/coder WIRTUAL_VERSION=foobar make test-integration`.
+> **Note:** you can specify `WIRTUAL_IMAGE` if the Wirtual image you wish to test is hosted somewhere other than `docker.io/onchainengineer/wirtualdev`.
+> For example, `WIRTUAL_IMAGE=example.com/repo/wirtual WIRTUAL_VERSION=foobar make test-integration`.

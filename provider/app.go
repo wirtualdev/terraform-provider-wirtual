@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	// appSlugRegex is the regex used to validate the slug of a coder_app
+	// appSlugRegex is the regex used to validate the slug of a wirtual_app
 	// resource. It must be a valid hostname and cannot contain two consecutive
 	// hyphens or start/end with a hyphen.
 	//
@@ -70,7 +70,7 @@ func appResource() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"agent_id": {
 				Type:        schema.TypeString,
-				Description: "The `id` property of a `coder_agent` resource to associate with.",
+				Description: "The `id` property of a `wirtual_agent` resource to associate with.",
 				ForceNew:    true,
 				Required:    true,
 			},
@@ -87,7 +87,7 @@ func appResource() *schema.Resource {
 				Type: schema.TypeString,
 				Description: "A URL to an icon that will display in the dashboard. View built-in " +
 					"icons here: https://github.com/wirtualdev/wirtual/tree/main/site/static/icon. Use a " +
-					"built-in icon with `\"${data.coder_workspace.me.access_url}/icon/<path>\"`.",
+					"built-in icon with `\"${data.wirtual_workspace.me.access_url}/icon/<path>\"`.",
 				ForceNew: true,
 				Optional: true,
 				ValidateFunc: func(i interface{}, s string) ([]string, []error) {
@@ -113,7 +113,7 @@ func appResource() *schema.Resource {
 					}
 
 					if !appSlugRegex.MatchString(valStr) {
-						return diag.Errorf(`invalid "coder_app" slug, must be a valid hostname (%q, cannot contain two consecutive hyphens or start/end with a hyphen): %q`, appSlugRegex.String(), valStr)
+						return diag.Errorf(`invalid "wirtual_app" slug, must be a valid hostname (%q, cannot contain two consecutive hyphens or start/end with a hyphen): %q`, appSlugRegex.String(), valStr)
 					}
 
 					return nil
@@ -161,7 +161,7 @@ func appResource() *schema.Resource {
 					"all authenticated users. Level `\"public\"` shares it with " +
 					"any user, including unauthenticated users. Permitted " +
 					"application sharing levels can be configured site-wide " +
-					"via a flag on `coder server` (Enterprise only).",
+					"via a flag on `wirtual server` (Enterprise only).",
 				ForceNew: true,
 				Optional: true,
 				Default:  "owner",

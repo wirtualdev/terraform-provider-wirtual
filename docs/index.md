@@ -15,8 +15,8 @@ Terraform provider for defining Wirtual [templates](https://wirtual.dev/docs/tem
 ```terraform
 terraform {
   required_providers {
-    coder = {
-      source = "coder/coder"
+    wirtual = {
+      source = "wirtual/wirtual"
     }
   }
 }
@@ -25,9 +25,9 @@ provider "google" {
   region = "us-central1"
 }
 
-data "coder_workspace" "me" {}
+data "wirtual_workspace" "me" {}
 
-resource "coder_agent" "dev" {
+resource "wirtual_agent" "dev" {
   arch = "amd64"
   os   = "linux"
   auth = "google-instance-identity"
@@ -37,8 +37,8 @@ data "google_compute_default_service_account" "default" {}
 
 resource "google_compute_instance" "dev" {
   zone         = "us-central1-a"
-  count        = data.coder_workspace.me.start_count
-  name         = "coder-${data.coder_workspace.me.owner}-${data.coder_workspace.me.name}"
+  count        = data.wirtual_workspace.me.start_count
+  name         = "wirtual-${data.wirtual_workspace.me.owner}-${data.wirtual_workspace.me.name}"
   machine_type = "e2-medium"
   network_interface {
     network = "default"
@@ -55,7 +55,7 @@ resource "google_compute_instance" "dev" {
     email  = data.google_compute_default_service_account.default.email
     scopes = ["cloud-platform"]
   }
-  metadata_startup_script = coder_agent.dev.init_script
+  metadata_startup_script = wirtual_agent.dev.init_script
 }
 ```
 

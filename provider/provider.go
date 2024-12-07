@@ -68,26 +68,26 @@ func New() *schema.Provider {
 			}, nil
 		},
 		DataSourcesMap: map[string]*schema.Resource{
-			"coder_workspace":       workspaceDataSource(),
-			"coder_workspace_tags":  workspaceTagDataSource(),
-			"coder_provisioner":     provisionerDataSource(),
-			"coder_parameter":       parameterDataSource(),
-			"coder_git_auth":        gitAuthDataSource(),
-			"coder_external_auth":   externalAuthDataSource(),
-			"coder_workspace_owner": workspaceOwnerDataSource(),
+			"wirtual_workspace":       workspaceDataSource(),
+			"wirtual_workspace_tags":  workspaceTagDataSource(),
+			"wirtual_provisioner":     provisionerDataSource(),
+			"wirtual_parameter":       parameterDataSource(),
+			"wirtual_git_auth":        gitAuthDataSource(),
+			"wirtual_external_auth":   externalAuthDataSource(),
+			"wirtual_workspace_owner": workspaceOwnerDataSource(),
 		},
 		ResourcesMap: map[string]*schema.Resource{
-			"coder_agent":          agentResource(),
-			"coder_agent_instance": agentInstanceResource(),
-			"coder_app":            appResource(),
-			"coder_metadata":       metadataResource(),
-			"coder_script":         scriptResource(),
-			"coder_env":            envResource(),
+			"wirtual_agent":          agentResource(),
+			"wirtual_agent_instance": agentInstanceResource(),
+			"wirtual_app":            appResource(),
+			"wirtual_metadata":       metadataResource(),
+			"wirtual_script":         scriptResource(),
+			"wirtual_env":            envResource(),
 		},
 	}
 }
 
-// populateIsNull reads the raw plan for a coder_metadata resource being created,
+// populateIsNull reads the raw plan for a wirtual_metadata resource being created,
 // figures out which items have null "value"s, and augments them by setting the
 // "is_null" field to true. This ugly hack is necessary because terraform-plugin-sdk
 // is designed around a old version of Terraform that didn't support nullable fields,
@@ -97,7 +97,7 @@ func populateIsNull(resourceData *schema.ResourceData) (result interface{}, err 
 	// The cty package reports type mismatches by panicking
 	defer func() {
 		if r := recover(); r != nil {
-			err = xerrors.Errorf("panic while handling coder_metadata: %#v", r)
+			err = xerrors.Errorf("panic while handling wirtual_metadata: %#v", r)
 		}
 	}()
 

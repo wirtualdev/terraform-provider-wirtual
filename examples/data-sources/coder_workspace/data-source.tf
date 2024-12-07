@@ -1,6 +1,6 @@
-data "coder_workspace" "dev" {
+data "wirtual_workspace" "dev" {
 }
 
 resource "kubernetes_pod" "dev" {
-  count = data.coder_workspace.dev.transition == "start" ? 1 : 0
+  count = data.wirtual_workspace.dev.transition == "start" ? 1 : 0
 }

@@ -4,8 +4,8 @@ import (
 	"regexp"
 	"testing"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider"
 	"github.com/stretchr/testify/require"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -17,14 +17,14 @@ func TestScript(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		Providers: map[string]*schema.Provider{
-			"coder": provider.New(),
+			"wirtual": provider.New(),
 		},
 		IsUnitTest: true,
 		Steps: []resource.TestStep{{
 			Config: `
-			provider "coder" {
+			provider "wirtual" {
 			}
-			resource "coder_script" "example" {
+			resource "wirtual_script" "example" {
 				agent_id = "some id"
 				display_name = "Hey"
 				script = "Wow"
@@ -34,7 +34,7 @@ func TestScript(t *testing.T) {
 			Check: func(state *terraform.State) error {
 				require.Len(t, state.Modules, 1)
 				require.Len(t, state.Modules[0].Resources, 1)
-				script := state.Modules[0].Resources["coder_script.example"]
+				script := state.Modules[0].Resources["wirtual_script.example"]
 				require.NotNil(t, script)
 				t.Logf("script attributes: %#v", script.Primary.Attributes)
 				for key, expected := range map[string]string{
@@ -56,14 +56,14 @@ func TestScriptNeverRuns(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		Providers: map[string]*schema.Provider{
-			"coder": provider.New(),
+			"wirtual": provider.New(),
 		},
 		IsUnitTest: true,
 		Steps: []resource.TestStep{{
 			Config: `
-			provider "coder" {
+			provider "wirtual" {
 			}
-			resource "coder_script" "example" {
+			resource "wirtual_script" "example" {
 				agent_id = ""
 				display_name = "Hey"
 				script = "Wow"
@@ -79,14 +79,14 @@ func TestScriptStartBlocksLoginRequiresRunOnStart(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
 		Providers: map[string]*schema.Provider{
-			"coder": provider.New(),
+			"wirtual": provider.New(),
 		},
 		IsUnitTest: true,
 		Steps: []resource.TestStep{{
 			Config: `
-			provider "coder" {
+			provider "wirtual" {
 			}
-			resource "coder_script" "example" {
+			resource "wirtual_script" "example" {
 				agent_id = ""
 				display_name = "Hey"
 				script = "Wow"
@@ -99,14 +99,14 @@ func TestScriptStartBlocksLoginRequiresRunOnStart(t *testing.T) {
 	})
 	resource.Test(t, resource.TestCase{
 		Providers: map[string]*schema.Provider{
-			"coder": provider.New(),
+			"wirtual": provider.New(),
 		},
 		IsUnitTest: true,
 		Steps: []resource.TestStep{{
 			Config: `
-			provider "coder" {
+			provider "wirtual" {
 			}
-			resource "coder_script" "example" {
+			resource "wirtual_script" "example" {
 				agent_id = ""
 				display_name = "Hey"
 				script = "Wow"
@@ -117,7 +117,7 @@ func TestScriptStartBlocksLoginRequiresRunOnStart(t *testing.T) {
 			Check: func(state *terraform.State) error {
 				require.Len(t, state.Modules, 1)
 				require.Len(t, state.Modules[0].Resources, 1)
-				script := state.Modules[0].Resources["coder_script.example"]
+				script := state.Modules[0].Resources["wirtual_script.example"]
 				require.NotNil(t, script)
 				t.Logf("script attributes: %#v", script.Primary.Attributes)
 				for key, expected := range map[string]string{

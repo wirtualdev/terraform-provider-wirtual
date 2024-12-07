@@ -1,11 +1,11 @@
-provider "coder" {}
+provider "wirtual" {}
 
 
-data "coder_external_auth" "github" {
+data "wirtual_external_auth" "github" {
   id = "github"
 }
 
-data "coder_external_auth" "azure-identity" {
+data "wirtual_external_auth" "azure-identity" {
   id       = "azure-identiy"
   optional = true
 }

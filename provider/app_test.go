@@ -6,11 +6,11 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/wirtualdev/terraform-provider-coder/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/stretchr/testify/require"
+	"github.com/wirtualdev/terraform-provider-wirtual/provider"
 )
 
 func TestApp(t *testing.T) {
@@ -21,19 +21,19 @@ func TestApp(t *testing.T) {
 
 		resource.Test(t, resource.TestCase{
 			Providers: map[string]*schema.Provider{
-				"coder": provider.New(),
+				"wirtual": provider.New(),
 			},
 			IsUnitTest: true,
 			Steps: []resource.TestStep{{
 				Config: `
-				provider "coder" {
+				provider "wirtual" {
 				}
-				resource "coder_agent" "dev" {
+				resource "wirtual_agent" "dev" {
 					os = "linux"
 					arch = "amd64"
 				}
-				resource "coder_app" "code-server" {
-					agent_id = coder_agent.dev.id
+				resource "wirtual_app" "code-server" {
+					agent_id = wirtual_agent.dev.id
 					slug = "code-server"
 					display_name = "code-server"
 					icon = "builtin:vim"
@@ -51,7 +51,7 @@ func TestApp(t *testing.T) {
 				Check: func(state *terraform.State) error {
 					require.Len(t, state.Modules, 1)
 					require.Len(t, state.Modules[0].Resources, 2)
-					resource := state.Modules[0].Resources["coder_app.code-server"]
+					resource := state.Modules[0].Resources["wirtual_app.code-server"]
 					require.NotNil(t, resource)
 					for _, key := range []string{
 						"agent_id",
@@ -91,13 +91,13 @@ func TestApp(t *testing.T) {
 		}{{
 			name: "Valid",
 			config: `
-			provider "coder" {}
-			resource "coder_agent" "dev" {
+			provider "wirtual" {}
+			resource "wirtual_agent" "dev" {
 				os = "linux"
 				arch = "amd64"
 			}
-			resource "coder_app" "test" {
-				agent_id = coder_agent.dev.id
+			resource "wirtual_app" "test" {
+				agent_id = wirtual_agent.dev.id
 				slug = "test"
 				display_name = "Testing"
 				url = "https://google.com"
@@ -108,13 +108,13 @@ func TestApp(t *testing.T) {
 		}, {
 			name: "ConflictsWithSubdomain",
 			config: `
-			provider "coder" {}
-			resource "coder_agent" "dev" {
+			provider "wirtual" {}
+			resource "wirtual_agent" "dev" {
 				os = "linux"
 				arch = "amd64"
 			}
-			resource "coder_app" "test" {
-				agent_id = coder_agent.dev.id
+			resource "wirtual_app" "test" {
+				agent_id = wirtual_agent.dev.id
 				slug = "test"
 				display_name = "Testing"
 				url = "https://google.com"
@@ -130,7 +130,7 @@ func TestApp(t *testing.T) {
 				t.Parallel()
 				resource.Test(t, resource.TestCase{
 					Providers: map[string]*schema.Provider{
-						"coder": provider.New(),
+						"wirtual": provider.New(),
 					},
 					IsUnitTest: true,
 					Steps: []resource.TestStep{{
@@ -138,7 +138,7 @@ func TestApp(t *testing.T) {
 						Check: func(state *terraform.State) error {
 							require.Len(t, state.Modules, 1)
 							require.Len(t, state.Modules[0].Resources, 2)
-							resource := state.Modules[0].Resources["coder_app.test"]
+							resource := state.Modules[0].Resources["wirtual_app.test"]
 							require.NotNil(t, resource)
 							require.Equal(t, strconv.FormatBool(tc.external), resource.Primary.Attributes["external"])
 							return nil
@@ -197,14 +197,14 @@ func TestApp(t *testing.T) {
 					sharingLine = fmt.Sprintf("share = %q", c.value)
 				}
 				config := fmt.Sprintf(`
-				provider "coder" {
+				provider "wirtual" {
 				}
-				resource "coder_agent" "dev" {
+				resource "wirtual_agent" "dev" {
 					os = "linux"
 					arch = "amd64"
 				}
-				resource "coder_app" "code-server" {
-					agent_id = coder_agent.dev.id
+				resource "wirtual_app" "code-server" {
+					agent_id = wirtual_agent.dev.id
 					slug = "code-server"
 					display_name = "code-server"
 					icon = "builtin:vim"
@@ -221,7 +221,7 @@ func TestApp(t *testing.T) {
 				checkFn := func(state *terraform.State) error {
 					require.Len(t, state.Modules, 1)
 					require.Len(t, state.Modules[0].Resources, 2)
-					resource := state.Modules[0].Resources["coder_app.code-server"]
+					resource := state.Modules[0].Resources["wirtual_app.code-server"]
 					require.NotNil(t, resource)
 
 					// Read share and ensure it matches the expected
@@ -236,7 +236,7 @@ func TestApp(t *testing.T) {
 
 				resource.Test(t, resource.TestCase{
 					Providers: map[string]*schema.Provider{
-						"coder": provider.New(),
+						"wirtual": provider.New(),
 					},
 					IsUnitTest: true,
 					Steps: []resource.TestStep{{
@@ -259,13 +259,13 @@ func TestApp(t *testing.T) {
 		}{{
 			name: "Is Hidden",
 			config: `
-			provider "coder" {}
-			resource "coder_agent" "dev" {
+			provider "wirtual" {}
+			resource "wirtual_agent" "dev" {
 				os = "linux"
 				arch = "amd64"
 			}
-			resource "coder_app" "test" {
-				agent_id = coder_agent.dev.id
+			resource "wirtual_app" "test" {
+				agent_id = wirtual_agent.dev.id
 				slug = "test"
 				display_name = "Testing"
 				url = "https://google.com"
@@ -277,13 +277,13 @@ func TestApp(t *testing.T) {
 		}, {
 			name: "Is Not Hidden",
 			config: `
-			provider "coder" {}
-			resource "coder_agent" "dev" {
+			provider "wirtual" {}
+			resource "wirtual_agent" "dev" {
 				os = "linux"
 				arch = "amd64"
 			}
-			resource "coder_app" "test" {
-				agent_id = coder_agent.dev.id
+			resource "wirtual_app" "test" {
+				agent_id = wirtual_agent.dev.id
 				slug = "test"
 				display_name = "Testing"
 				url = "https://google.com"
@@ -299,7 +299,7 @@ func TestApp(t *testing.T) {
 				t.Parallel()
 				resource.Test(t, resource.TestCase{
 					Providers: map[string]*schema.Provider{
-						"coder": provider.New(),
+						"wirtual": provider.New(),
 					},
 					IsUnitTest: true,
 					Steps: []resource.TestStep{{
@@ -307,7 +307,7 @@ func TestApp(t *testing.T) {
 						Check: func(state *terraform.State) error {
 							require.Len(t, state.Modules, 1)
 							require.Len(t, state.Modules[0].Resources, 2)
-							resource := state.Modules[0].Resources["coder_app.test"]
+							resource := state.Modules[0].Resources["wirtual_app.test"]
 							require.NotNil(t, resource)
 							require.Equal(t, strconv.FormatBool(tc.hidden), resource.Primary.Attributes["hidden"])
 							return nil

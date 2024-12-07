@@ -1,7 +1,7 @@
-data "coder_workspace" "me" {
+data "wirtual_workspace" "me" {
 }
 
-resource "coder_agent" "dev" {
+resource "wirtual_agent" "dev" {
   os   = "linux"
   arch = "amd64"
   dir  = "/workspace"
@@ -15,7 +15,7 @@ resource "coder_agent" "dev" {
   metadata {
     display_name = "CPU Usage"
     key          = "cpu_usage"
-    script       = "coder stat cpu"
+    script       = "wirtual stat cpu"
     interval     = 10
     timeout      = 1
     order        = 2
@@ -23,7 +23,7 @@ resource "coder_agent" "dev" {
   metadata {
     display_name = "RAM Usage"
     key          = "ram_usage"
-    script       = "coder stat mem"
+    script       = "wirtual stat mem"
     interval     = 10
     timeout      = 1
     order        = 1
@@ -33,13 +33,13 @@ resource "coder_agent" "dev" {
 }
 
 resource "kubernetes_pod" "dev" {
-  count = data.coder_workspace.me.start_count
+  count = data.wirtual_workspace.me.start_count
   spec {
     container {
-      command = ["sh", "-c", coder_agent.dev.init_script]
+      command = ["sh", "-c", wirtual_agent.dev.init_script]
       env {
         name  = "WIRTUAL_AGENT_TOKEN"
-        value = coder_agent.dev.token
+        value = wirtual_agent.dev.token
       }
     }
   }

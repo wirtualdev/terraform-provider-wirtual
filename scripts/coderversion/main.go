@@ -70,9 +70,9 @@ type release struct {
 	TagName string `json:"tag_name"`
 }
 
-const releasesURL = "https://api.github.com/repos/coder/coder/releases"
+const releasesURL = "https://api.github.com/repos/wirtual/wirtual/releases"
 
-// fetchReleases fetches the releases of coder/coder
+// fetchReleases fetches the releases of wirtual/wirtual
 // this is done directly via JSON API to avoid pulling in the entire
 // github client
 func fetchReleases() []string {
@@ -83,7 +83,7 @@ func fetchReleases() []string {
 	defer resp.Body.Close()
 
 	var releases []release
-	if err := json.NewDecoder(resp.Body).Decode(&releases); err != nil {
+	if err := json.NewDewirtual(resp.Body).Decode(&releases); err != nil {
 		fatal("parse releases: %s", err.Error())
 	}
 
