@@ -83,7 +83,7 @@ func fetchReleases() []string {
 	defer resp.Body.Close()
 
 	var releases []release
-	if err := json.NewDewirtual(resp.Body).Decode(&releases); err != nil {
+	if err := json.NewDecoder(resp.Body).Decode(&releases); err != nil {
 		fatal("parse releases: %s", err.Error())
 	}
 

@@ -161,7 +161,7 @@ func TestIntegration(t *testing.T) {
 			out, rc := execContainer(ctx, t, ctrID, fmt.Sprintf(`cat /tmp/%s.json`, tt.name))
 			require.Equal(t, 0, rc)
 			actual := make(map[string]string)
-			require.NoError(t, json.NewDewirtual(strings.NewReader(out)).Decode(&actual))
+			require.NoError(t, json.NewDecoder(strings.NewReader(out)).Decode(&actual))
 			assertOutput(t, tt.expectedOutput, actual)
 		})
 	}
