@@ -70,9 +70,9 @@ type release struct {
 	TagName string `json:"tag_name"`
 }
 
-const releasesURL = "https://api.github.com/repos/wirtual/wirtual/releases"
+const releasesURL = "https://api.github.com/repos/wirtualdev/wirtual/releases"
 
-// fetchReleases fetches the releases of wirtual/wirtual
+// fetchReleases fetches the releases of wirtualdev/wirtual
 // this is done directly via JSON API to avoid pulling in the entire
 // github client
 func fetchReleases() []string {

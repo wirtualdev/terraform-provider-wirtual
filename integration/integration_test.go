@@ -41,7 +41,7 @@ func TestIntegration(t *testing.T) {
 
 	wirtualImg := os.Getenv("WIRTUAL_IMAGE")
 	if wirtualImg == "" {
-		wirtualImg = "docker.io/onchainengineer/wirtualdev"
+		wirtualImg = "docker.io/onchainengineer/wirtual"
 	}
 
 	wirtualVersion := os.Getenv("WIRTUAL_VERSION")
@@ -173,7 +173,7 @@ func setup(ctx context.Context, t *testing.T, name, wirtualImg, wirtualVersion s
 		// the locally built version of the provider.
 		testTerraformrc = `provider_installation {
 		dev_overrides {
-		  "wirtual/wirtual" = "/src"
+		  "wirtualdev/wirtual" = "/src"
 		}
 		  direct{}
 	  }`

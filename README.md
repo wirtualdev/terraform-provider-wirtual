@@ -23,9 +23,9 @@ to setup your local Terraform to use your local version rather than the registry
 
    ```hcl
     provider_installation {
-        # Override the wirtual/wirtual provider to use your local version
+        # Override the wirtualdev/wirtual provider to use your local version
         dev_overrides {
-          "wirtual/wirtual" = "/path/to/terraform-provider-wirtual"
+          "wirtualdev/wirtual" = "/path/to/terraform-provider-wirtual"
         }
 
         # For all other providers, install them directly from their origin provider
@@ -41,7 +41,7 @@ to setup your local Terraform to use your local version rather than the registry
    terraform {
        required_providers {
            wirtual = {
-               source = "wirtual/wirtual"
+               source = "wirtualdev/wirtual"
            }
        }
    }
@@ -70,10 +70,10 @@ To run these integration tests locally:
 1. Pull the version of the Wirtual image you wish to test:
 
    ```console
-     docker pull docker.io/onchainengineer/wirtualdev:main-x.y.z-devel-abcd1234
+     docker pull docker.io/onchainengineer/wirtual:main-x.y.z-devel-abcd1234
    ```
 
 1. Run `WIRTUAL_VERSION=main-x.y.z-devel-abcd1234 make test-integration`.
 
-> **Note:** you can specify `WIRTUAL_IMAGE` if the Wirtual image you wish to test is hosted somewhere other than `docker.io/onchainengineer/wirtualdev`.
+> **Note:** you can specify `WIRTUAL_IMAGE` if the Wirtual image you wish to test is hosted somewhere other than `docker.io/onchainengineer/wirtual`.
 > For example, `WIRTUAL_IMAGE=example.com/repo/wirtual WIRTUAL_VERSION=foobar make test-integration`.

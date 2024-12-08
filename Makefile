@@ -9,7 +9,7 @@ gen:
 
 build: terraform-provider-wirtual
 
-# Builds the provider. Note that as wirtual/wirtual is based on
+# Builds the provider. Note that as wirtualdev/wirtual is based on
 # alpine, we need to disable cgo.
 terraform-provider-wirtual: provider/*.go main.go
 	CGO_ENABLED=0 go build .
