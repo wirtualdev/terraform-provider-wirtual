@@ -41,7 +41,7 @@ jobs:
       - name: Run integration test (mainline)
         timeout-minutes: 10
         env:
-          WIRTUAL_IMAGE: "docker.io/onchainengineer/wirtualdev"
+          WIRTUAL_IMAGE: "docker.io/onchainengineer/wirtual"
         run: |
           source <(go run ./scripts/wirtualversion)
           WIRTUAL_VERSION="${WIRTUAL_MAINLINE_VERSION}" go test -v ./integration
@@ -49,7 +49,7 @@ jobs:
       - name: Run integration test (stable)
         timeout-minutes: 10
         env:
-          WIRTUAL_IMAGE: "docker.io/onchainengineer/wirtualdev"
+          WIRTUAL_IMAGE: "docker.io/onchainengineer/wirtual"
         run: |
           source <(go run ./scripts/wirtualversion)
           WIRTUAL_VERSION="${WIRTUAL_STABLE_VERSION}" go test -v ./integration
